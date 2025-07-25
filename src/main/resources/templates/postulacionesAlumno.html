@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Postulaciones - EmpleaU</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link th:href="@{/css/postulacionesAlumno.css}" rel="stylesheet">
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+    <!-- Header -->
+    <div class="header-section position-relative">
+        <div class="container position-relative">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="display-6 fw-bold mb-2">Mis Postulaciones</h1>
+                    <p class="mb-0 opacity-90">Gestiona y da seguimiento a todas tus postulaciones de práctica</p>
+                </div>
+            </div>
+        </div>
+    </div>
+<main class="flex-fill">
+    <div class="container py-5">
+        <!-- Filter Buttons -->
+        <div class="filter-buttons">
+            <div class="text-center">
+                <div class="d-flex flex-wrap justify-content-center">
+                    <button class="filter-btn active" data-status="all" onclick="filterByStatus('all')">
+                        <i class="bi bi-list-ul me-2"></i>
+                        Todas
+                        <span class="badge">1</span>
+                    </button>
+                    <button class="filter-btn" data-status="aceptada" onclick="filterByStatus('aceptada')">
+                        <i class="bi bi-check-circle me-2"></i>
+                        Aceptadas
+                        <span class="badge">1</span>
+                    </button>
+                    <button class="filter-btn" data-status="rechazada" onclick="filterByStatus('rechazada')">
+                        <i class="bi bi-x-circle me-2"></i>
+                        Rechazadas
+                        <span class="badge">0</span>
+                    </button>
+                    <button class="filter-btn" data-status="pendiente" onclick="filterByStatus('pendiente')">
+                        <i class="bi bi-clock me-2"></i>
+                        Pendientes
+                        <span class="badge">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Applications List -->
+        <div id="applicationsList">
+            <!-- Postulación Aceptada -->
+            <div class="application-card" data-status="aceptada">
+                <div class="p-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 mb-3 mb-md-0">
+                            <h5 class="fw-bold mb-2">Desarrollador Frontend Junior</h5>
+                            <p class="text-muted mb-2">TechCorp Solutions S.A.C.</p>
+                            <div class="d-flex flex-wrap gap-2 mb-2">
+                                <span class="badge bg-danger-subtle text-danger">React</span>
+                                <span class="badge bg-danger-subtle text-danger">JavaScript</span>
+                                <span class="badge bg-danger-subtle text-danger">CSS</span>
+                            </div>
+                            <div class="d-flex align-items-center text-muted small">
+                                <i class="bi bi-geo-alt me-1"></i>
+                                <span>Lima, Perú</span>
+                                <span class="mx-2">•</span>
+                                <i class="bi bi-calendar me-1"></i>
+                                <span>15/10/2024</span>
+                            </div>
+                        </div>
+                        <div class="col-md-2 text-center mb-3 mb-md-0">
+                            <span class="status-badge status-aceptada">
+                                <i class="bi bi-check-circle"></i>
+                                Aceptada
+                            </span>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <button class="btn btn-primary-red" data-bs-toggle="modal" data-bs-target="#detallesOferta">
+                                <i class="bi bi-eye me-1"></i>Ver Detalles
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>          
+
+        </div>
+    </div>
+
+    <!-- Empty State -->
+    <div id="emptyState" class="empty-state d-none">
+        <i class="bi bi-inbox"></i>
+        <h4 class="fw-bold">No hay postulaciones</h4>
+        <p>No se encontraron postulaciones con el filtro seleccionado.</p>
+    </div>
+    </div>
+
+    <!-- Modal de Detalles 1 - Desarrollador Frontend -->
+    <div class="modal fade" id="detallesOferta" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="bi bi-info-circle me-2"></i>
+                        Detalles de la Postulación
+                    </h5>
+                    <button title="cerrar" type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Información de la Oferta -->
+                    <div class="detail-section">
+                        <h6><i class="bi bi-briefcase me-2"></i>Información de la Oferta</h6>
+                        <div class="info-row">
+                            <span class="info-label">Puesto:</span>
+                            <span class="info-value">Desarrollador Frontend Junior</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Empresa:</span>
+                            <span class="info-value">TechCorp Solutions S.A.C.</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Ubicación:</span>
+                            <span class="info-value">Lima, Perú</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Salario:</span>
+                            <span class="info-value">S/. 1,500 - 2,000</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Modalidad:</span>
+                            <span class="info-value">Presencial</span>
+                        </div>
+                    </div>
+
+                    <!-- Estado de la Postulación -->
+                    <div class="detail-section">
+                        <h6><i class="bi bi-flag me-2"></i>Estado de la Postulación</h6>
+                        <div class="info-row">
+                            <span class="info-label">Estado Actual:</span>
+                            <span class="info-value">
+                                <span class="status-badge status-aceptada">
+                                    <i class="bi bi-check-circle"></i>
+                                    Aceptada
+                                </span>
+                            </span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Fecha de Postulación:</span>
+                            <span class="info-value">15/10/2024 - 10:30 AM</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Última Actualización:</span>
+                            <span class="info-value">20/10/2024 - 4:45 PM</span>
+                        </div>
+                    </div>                  
+                    <!-- Descripción de la Oferta -->
+                    <div class="detail-section">
+                        <h6><i class="bi bi-file-text me-2"></i>Descripción de la Oferta</h6>
+                        <p>
+                            Buscamos un desarrollador frontend junior con conocimientos en React, JavaScript y CSS.
+                            El candidato ideal debe tener experiencia en desarrollo de interfaces de usuario modernas
+                            y responsivas. Se valorará conocimiento en herramientas de versionado como Git.
+                        </p>
+                    </div>
+
+                    <!-- Requisitos -->
+                    <div class="detail-section">
+                        <h6><i class="bi bi-list-check me-2"></i>Requisitos</h6>
+                        <ul>
+                            <li>Conocimientos en React y JavaScript</li>
+                            <li>Experiencia con CSS y frameworks como Bootstrap</li>
+                            <li>Manejo de Git y GitHub</li>
+                            <li>Estudiante de últimos ciclos o egresado</li>
+                            <li>Disponibilidad de tiempo completo</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-red" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+    <!-- Footer -->
+    <footer class="footer bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="d-flex gap-3">
+                        <a title="facebook" href="#" class="footer-link">
+                            <i class="bi bi-facebook fs-5"></i>
+                        </a>
+                        <a title="twitter" href="#" class="footer-link">
+                            <i class="bi bi-twitter fs-5"></i>
+                        </a>
+                        <a title="linkedin" href="#" class="footer-link">
+                            <i class="bi bi-linkedin fs-5"></i>
+                        </a>
+                        <a title="instagram" href="#" class="footer-link">
+                            <i class="bi bi-instagram fs-5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p class="mb-0">&copy; 2024 EmpleaU. Todos los derechos reservados.</p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <div class="d-flex gap-3 justify-content-md-end">
+                            <a href="#" class="text-white-50">Términos</a>
+                            <a href="#" class="text-white-50">Privacidad</a>
+                            <a href="#" class="text-white-50">Contacto</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="my-4 opacity-25">
+
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0 text-muted">
+                        &copy; 2025 EmpleaU. Todos los derechos reservados.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{/js/postulacionesAlumno.js}"></script>
+</body>
+
+</html>
